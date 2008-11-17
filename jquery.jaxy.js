@@ -1,13 +1,13 @@
 (function($) {
 
-$(function() {
-  $('form.ajax').ensure('ajaxForm', {dataType: 'script'});
-  $('a.ajax').ensure('ajaxLink');
-  $('a.submit').ensure('submitClick');
-  $('select.submit').ensure('submitChange');
-});
-
 $.fn.extend({
+
+  jaxy: function() {
+    return this.each(function() {
+      if (/^a$/.test(this.tagName)) $(this).ajaxLink();
+      if (/^form$/.test(this.tagName)) $(this).ajaxForm({dataType: 'script'});
+    });
+  },
 
   ajaxLink: function() {
     return this.click(function() {

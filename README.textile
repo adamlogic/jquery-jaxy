@@ -1,0 +1,41 @@
+h1. jquery-jaxy
+
+h2. What is it?
+
+A jQuery plugin to complement jquery-form, making ajax as effortless as possible.
+
+h2. Dependencies
+
+* jQuery
+* "jquery-form":http://malsup.com/jquery/form/
+
+h2. Methods
+
+h3. jaxy
+
+Tells links and forms to make their request via ajax.  It assumes the response to be executable JavaScript.
+
+h3. submitClick
+
+Tells a link (or any other element) to submit its containing form when clicked. (sometimes you just don't want a submit button)
+
+h3. submitChange
+
+Tells a select box (or any other element) to submit its containing form when changed.
+
+h2. Recommended Usage
+
+<pre><code>
+  $('a.ajax, form.ajax').jaxy();
+  $('a.submit').submitClick();
+  $('select.submit').submitChange();
+</code></pre>
+
+_bonus points for using "jquery-ensure":http://github.com/adamlogic/jquery-ensure/tree/master_
+
+<pre><code>
+  $('a.ajax, form.ajax').ensure('jaxy');
+  $('a.submit').ensure('submitClick');
+  $('select.submit').ensure('submitChange');
+</code></pre>
+
