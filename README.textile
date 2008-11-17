@@ -31,7 +31,7 @@ h2. Recommended Usage
   $('select.submit').submitChange();
 </code></pre>
 
-_bonus points for using "jquery-ensure":http://github.com/adamlogic/jquery-ensure/tree/master _
+bonus points for using "jquery-ensure":http://github.com/adamlogic/jquery-ensure/tree/master
 
 <pre><code>
   $('a.ajax, form.ajax').ensure('jaxy');
