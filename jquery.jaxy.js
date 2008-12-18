@@ -18,7 +18,14 @@ $.fn.extend({
 
   submitClick: function() {
     return this.click(function() {
-      $(this).parents('form:first').submit();
+      var el = $(this);
+
+      if (el.attr('target')) {
+        el.findTarget().submit();
+      } else {
+        el.parents('form:first').submit();
+      }
+
       return false;
     });
   },
@@ -34,6 +41,14 @@ $.fn.extend({
       this.find('[name="' + name + '"]').val(vals[name]);
     }
     return this;
+  },
+
+  findTarget: function() {
+    var target = this.attr('target'),
+        found = this.parents(target);
+
+    if (!found.length) found = $(target);
+    return found;
   }
 
 });
