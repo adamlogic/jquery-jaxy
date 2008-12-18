@@ -21,18 +21,25 @@ $(function() {
 // --- TESTS ---
 
 test("val() should work normally when reading form fields", function() {
-  equals('test', $('#has_value').val(), "did not return the correct value");
+  $('#has_value')[0].value = 'test';
+  equals($('#has_value').val(), 'test', "did not return the correct value");
 });
 
 test("val() should work normally when setting form fields", function() {
   $('#unset').val('new value');
-  equals('new value', $('#unset')[0].value, "did not set the correct value");
+  equals($('#unset')[0].value, 'new value', "did not set the correct value");
 });
 
 test("val() should set multiple fields in a form when passed a hash", function() {
   $('#form').val({has_value: 'first', unset: 'second'});
-  equals('first', $('#has_value')[0].value, "did not set the correct value");
-  equals('second', $('#unset')[0].value, "did not set the correct value");
+  equals($('#has_value')[0].value, 'first', "did not set the correct value");
+  equals($('#unset')[0].value, 'second', "did not set the correct value");
+});
+
+test("val() should accept a hash for any arbitrary element", function() {
+  $('#test_stuff').val({has_value: 'hash1', unset: 'hash2'});
+  equals($('#has_value')[0].value, 'hash1', "did not set the correct value");
+  equals($('#unset')[0].value, 'hash2', "did not set the correct value");
 });
 
 </script>
@@ -46,7 +53,7 @@ test("val() should set multiple fields in a form when passed a hash", function()
   <div id="main"></div>        
   
   <!-- HTML used by tests -->
-  <div style="display:none;">
+  <div id="test_stuff" style="display:none;">
     <a href="response.js" id="ajax_link" class="ajax">ajax link</a>
     <form id="form">
       <input type="text" name="unset" id="unset" value="" />
