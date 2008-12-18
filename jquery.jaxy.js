@@ -24,24 +24,12 @@ $.fn.extend({
     return this.ajaxForm({dataType: 'script'})
   },
 
-  submitClick: function() {
-    return this.click(function() {
-      var el = $(this);
-
-      if (el.attr('target')) {
-        el.findTarget().submit();
-      } else {
-        el.parents('form:first').submit();
-      }
-
-      return false;
-    });
+  submitOnClick: function() {
+    return this.click(submitTargetOrParent);
   },
 
-  submitChange: function() {
-    return this.change(function() {
-      $(this).parents('form:first').submit();
-    });
+  submitOnChange: function() {
+    return this.change(submitTargetOrParent);
   },
   
   vals: function(vals) {
@@ -60,5 +48,17 @@ $.fn.extend({
   }
 
 });
+
+function submitTargetOrParent() {
+  var el = $(this);
+
+  if (el.attr('target')) {
+    el.findTarget().submit();
+  } else {
+    el.parents('form:first').submit();
+  }
+
+  return false;
+}
 
 })(jQuery);
