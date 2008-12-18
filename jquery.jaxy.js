@@ -32,13 +32,6 @@ $.fn.extend({
     return this.change(submitTargetOrParent);
   },
   
-  vals: function(vals) {
-    for (var name in vals) {
-      this.find('[name="' + name + '"]').val(vals[name]);
-    }
-    return this;
-  },
-
   findTarget: function() {
     var target = this.attr('target'),
         found = this.parents(target);
@@ -59,6 +52,22 @@ function submitTargetOrParent() {
   }
 
   return false;
+}
+
+var $val = $.fn.val;
+$.fn.val = function(values) {
+  if (values == undefined) return $val.apply(this, arguments);
+
+  this.each(function() {
+    if (/form/i.test(this.tagName)) {
+      for (var name in values) {
+        $(this).find('[name="' + name + '"]').val(values[name]);
+      }
+      return this;
+    }
+  });
+
+  return $val.apply(this, arguments);
 }
 
 })(jQuery);

@@ -13,18 +13,27 @@
 
 <script language="javascript" type="text/javascript">
 
-module("Links with a class of 'jaxy'");
+// --- SETUP ---
 
-test("true", function() {
-  ok(true);
+$(function() {
 });
 
-test("should make an ajax GET request to the href URL and eval the result", function() {
-  expect(1);
-  //stop();
-  //$('#ajax_link').click();
+// --- TESTS ---
+
+test("val() should work normally when reading form fields", function() {
+  equals('test', $('#has_value').val(), "did not return the correct value");
 });
 
+test("val() should work normally when setting form fields", function() {
+  $('#unset').val('new value');
+  equals('new value', $('#unset')[0].value, "did not set the correct value");
+});
+
+test("val() should set multiple fields in a form when passed a hash", function() {
+  $('#form').val({has_value: 'first', unset: 'second'});
+  equals('first', $('#has_value')[0].value, "did not set the correct value");
+  equals('second', $('#unset')[0].value, "did not set the correct value");
+});
 
 </script>
 
@@ -39,6 +48,10 @@ test("should make an ajax GET request to the href URL and eval the result", func
   <!-- HTML used by tests -->
   <div style="display:none;">
     <a href="response.js" id="ajax_link" class="ajax">ajax link</a>
+    <form id="form">
+      <input type="text" name="unset" id="unset" value="" />
+      <input type="text" name="has_value" id="has_value" value="test" />
+    </form>
   </div>
         
 </body>

@@ -2,7 +2,7 @@ h1. jquery-jaxy
 
 h2. What is it?
 
-A jQuery plugin to complement jquery-form, making ajax as effortless as possible.
+A jQuery plugin to complement jquery-form, making ajax and working with forms as effortless as possible.
 
 h2. Dependencies
 
@@ -15,27 +15,34 @@ h3. jaxy
 
 Tells links and forms to make their request via ajax.  It assumes the response to be executable JavaScript.
 
-h3. submitClick
+Note that multipart forms are given an additional "format" field set to "js" so that server applications (such as Rails) can respond with JavaScript if desired.  The JS response will need to be wrapped in a textarea to be evaluated.
 
-Tells a link (or any other element) to submit its containing form when clicked. (sometimes you just don't want a submit button)
+h3. submitOnClick
 
-h3. submitChange
+Tells a link (or any other element) to submit a form when clicked (sometimes you just don't want a submit button).  If the link has a target attribute, it will be used as the selector to find the form to submit.  Otherwise, the containing form will be submitted. 
 
-Tells a select box (or any other element) to submit its containing form when changed.
+h3. submitOnChange
+
+Tells a select box (or any other element) to submit a form when changed.  If the element has a target attribute, it will be used as the selector to find the form to submit.  Otherwise, the containing form will be submitted. 
+
+h3. val
+
+This built-in jQuery method has been enhanced to set multiple values in a form.  When used on a form it accepts an object and uses the name/value pairs to find and set values in the form.
 
 h2. Recommended Usage
 
 <pre><code>
   $('a.ajax, form.ajax').jaxy();
-  $('a.submit').submitClick();
-  $('select.submit').submitChange();
+  $('a.submit').submitOnClick();
+  $('select.submit').submitOnChange();
+  $('#some_form').val({peanut_butter: 'jQuery', jelly: 'Rails'});
 </code></pre>
 
 bonus points for using "jquery-ensure":http://github.com/adamlogic/jquery-ensure/tree/master
 
 <pre><code>
   $('a.ajax, form.ajax').ensure('jaxy');
-  $('a.submit').ensure('submitClick');
-  $('select.submit').ensure('submitChange');
+  $('a.submit').ensure('submitOnClick');
+  $('select.submit').ensure('submitOnChange');
 </code></pre>
 
