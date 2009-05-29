@@ -38,11 +38,11 @@ h2. Recommended Usage
   $('#some_form').val({peanut_butter: 'jQuery', jelly: 'Rails'});
 </code></pre>
 
-bonus points for using "jquery-ensure":http://github.com/adamlogic/jquery-ensure/tree/master
+bonus points for using "jquery-always":http://github.com/adamlogic/jquery-always/tree/master
 
 <pre><code>
-  $('a.ajax, form.ajax').ensure('jaxy');
-  $('a.submit').ensure('submitOnClick');
-  $('select.submit').ensure('submitOnChange');
+  $('a.ajax, form.ajax').always().jaxy();
+  $('a.submit').always().submitOnClick();
+  $('select.submit').always().submitOnChange();
 </code></pre>
 
